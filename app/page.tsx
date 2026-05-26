@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 const navItems = [
-  { label: "Dashboard", icon: "D" },
-  { label: "Calendar", icon: "C" },
-  { label: "Tasks", icon: "T" },
-  { label: "Templates", icon: "P" },
-  { label: "Settings", icon: "S" },
+  { label: "Dashboard", icon: "D", href: "/" },
+  { label: "Calendar", icon: "C", href: "/calendar" },
+  { label: "Tasks", icon: "T", href: "/tasks" },
+  { label: "Templates", icon: "P", href: "/templates" },
+  { label: "Settings", icon: "S", href: "/settings" },
 ];
 
 const stats = [
@@ -120,7 +122,8 @@ export default function Home() {
 
             <nav className="mt-9 space-y-2 text-sm font-medium">
               {navItems.map((item, index) => (
-                <button
+                <Link
+                  href={item.href}
                   className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
                     index === 0
                       ? "bg-[#20201d] text-white"
@@ -132,7 +135,7 @@ export default function Home() {
                     {item.icon}
                   </span>
                   {item.label}
-                </button>
+                </Link>
               ))}
             </nav>
           </div>
