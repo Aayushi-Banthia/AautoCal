@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuthStatus } from "./components/AuthStatus";
 
 const navItems = [
   { label: "Dashboard", icon: "D", href: "/" },
@@ -182,9 +183,7 @@ export default function Home() {
                 <button className="rounded-full border border-[#ded7c9] px-5 py-3 text-sm font-semibold text-[#356859] transition hover:bg-[#edf7f2]">
                   Today
                 </button>
-                <button className="rounded-full bg-[#356859] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2c574b]">
-                  Connect Google Calendar
-                </button>
+                <AuthStatus />
               </div>
             </div>
 
