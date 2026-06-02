@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AuthStatus } from "./components/AuthStatus";
+import { VoiceAssistant } from "./components/VoiceAssistant";
 
 const navItems = [
   { label: "Dashboard", icon: "D", href: "/" },
@@ -96,13 +97,6 @@ const themes = [
     accent: "bg-[#20201d]",
     colors: ["bg-[#20201d]", "bg-[#356859]", "bg-[#dbc7a4]"],
   },
-];
-
-const aiDetails = [
-  ["Title", "Study session"],
-  ["Date", "Tomorrow"],
-  ["Time", "6:00 PM"],
-  ["Reminder", "30 minutes before"],
 ];
 
 export default function Home() {
@@ -287,59 +281,7 @@ export default function Home() {
               </div>
             </section>
 
-            <section className="rounded-2xl border border-[#ded7c9] bg-[#20201d] p-5 text-white shadow-sm">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#dbc7a4]">
-                  Voice assistant
-                </p>
-                <span className="rounded-full bg-[#356859] px-3 py-1 text-xs font-semibold">
-                  Listening ready
-                </span>
-              </div>
-              <h2 className="mt-3 text-2xl font-semibold">What should I plan?</h2>
-              <div className="mt-5 rounded-2xl bg-white/10 p-4">
-                <p className="text-sm text-white/70">Transcript preview</p>
-                <p className="mt-2 text-lg">
-                  &quot;Schedule a study session tomorrow at 6 PM.&quot;
-                </p>
-              </div>
-
-              <div className="mt-4 rounded-2xl bg-white p-4 text-[#20201d]">
-                <p className="text-sm font-semibold text-[#8a6451]">
-                  AI interpretation
-                </p>
-                <div className="mt-3 grid gap-2">
-                  {aiDetails.map(([label, value]) => (
-                    <div
-                      className="flex items-center justify-between rounded-xl bg-[#f8f5ef] px-3 py-2 text-sm"
-                      key={label}
-                    >
-                      <span className="text-[#777064]">{label}</span>
-                      <span className="font-semibold">{value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 text-xs font-semibold">
-                {["Idle", "Listening", "Confirm"].map((state, index) => (
-                  <span
-                    className={`rounded-full px-3 py-2 text-center ${
-                      index === 1
-                        ? "bg-[#dbc7a4] text-[#20201d]"
-                        : "bg-white/10 text-white/70"
-                    }`}
-                    key={state}
-                  >
-                    {state}
-                  </span>
-                ))}
-              </div>
-
-              <button className="mt-5 w-full rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#20201d] transition hover:bg-[#f1ece3]">
-                Start voice command
-              </button>
-            </section>
+            <VoiceAssistant />
           </div>
 
           <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
