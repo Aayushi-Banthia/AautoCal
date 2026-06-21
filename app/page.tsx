@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AuthStatus } from "./components/AuthStatus";
+import { ReminderNotifications } from "./components/ReminderNotifications";
 import { VoiceAssistant } from "./components/VoiceAssistant";
 
 const navItems = [
@@ -354,6 +355,8 @@ export default function Home() {
               ))}
             </div>
           </section>
+
+          <ReminderNotifications />
         </section>
       </div>
     </main>

@@ -1,5 +1,9 @@
 import { auth } from "@/auth";
-import { createGoogleCalendarEvent } from "../actions/calendar";
+import {
+  createGoogleCalendarEvent,
+  deleteGoogleCalendarEvent,
+  updateGoogleCalendarEvent,
+} from "../actions/calendar";
 import { AppFrame } from "../components/AppFrame";
 
 const hours = ["9 AM", "11 AM", "1 PM", "3 PM", "5 PM"];
@@ -16,8 +20,11 @@ type CalendarEvent = {
   title: string;
   time: string;
   date: string;
+  startValue?: string;
+  endValue?: string;
   tag: string;
   color: string;
+  canModify: boolean;
 };
 
 type GoogleCalendarItem = {
@@ -27,7 +34,26 @@ type GoogleCalendarItem = {
     dateTime?: string;
     date?: string;
   };
+  end?: {
+    dateTime?: string;
+    date?: string;
+  };
 };
+
+function toDateTimeLocalValue(value?: string) {
+  if (!value) {
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  const timezoneOffset = date.getTimezoneOffset() * 60000;
+  return new Date(date.getTime() - timezoneOffset).toISOString().slice(0, 16);
+}
 
 async function getGoogleCalendarEvents(
   accessToken?: string,
@@ -38,6 +64,7 @@ async function getGoogleCalendarEvents(
         ...event,
         id: `mock-${index}`,
         date: "Demo mode",
+        canModify: false,
       })),
     };
   }
@@ -72,6 +99,7 @@ async function getGoogleCalendarEvents(
   return {
     events: (data.items ?? []).map((event, index) => {
       const start = event.start?.dateTime ?? event.start?.date;
+      const end = event.end?.dateTime ?? event.end?.date;
       const date = start ? new Date(start) : null;
 
       return {
@@ -90,8 +118,11 @@ async function getGoogleCalendarEvents(
               month: "short",
             })
           : "No date",
+        startValue: toDateTimeLocalValue(start),
+        endValue: toDateTimeLocalValue(end),
         tag: "Google",
         color: colors[index % colors.length],
+        canModify: true,
       };
     }),
   };
@@ -170,6 +201,51 @@ export default async function CalendarPage() {
                         <p className="mt-1 font-mono text-xs text-[#777064]">
                           {event.date} at {event.time}
                         </p>
+                        {event.canModify ? (
+                          <div className="mt-4 grid gap-2 lg:grid-cols-[1fr_auto]">
+                            <form
+                              action={updateGoogleCalendarEvent}
+                              className="grid gap-2"
+                            >
+                              <input name="eventId" type="hidden" value={event.id} />
+                              <input
+                                className="rounded-lg border border-[#ded7c9] bg-[#fbfaf7] px-3 py-2 text-xs outline-none focus:border-[#356859]"
+                                name="title"
+                                type="text"
+                                defaultValue={event.title}
+                              />
+                              <div className="grid gap-2 sm:grid-cols-2">
+                                <input
+                                  className="rounded-lg border border-[#ded7c9] bg-[#fbfaf7] px-3 py-2 text-xs outline-none focus:border-[#356859]"
+                                  name="start"
+                                  type="datetime-local"
+                                  defaultValue={event.startValue}
+                                />
+                                <input
+                                  className="rounded-lg border border-[#ded7c9] bg-[#fbfaf7] px-3 py-2 text-xs outline-none focus:border-[#356859]"
+                                  name="end"
+                                  type="datetime-local"
+                                  defaultValue={event.endValue}
+                                />
+                              </div>
+                              <button
+                                className="rounded-full border border-[#ded7c9] px-3 py-2 text-xs font-semibold text-[#356859]"
+                                type="submit"
+                              >
+                                Save edit
+                              </button>
+                            </form>
+                            <form action={deleteGoogleCalendarEvent}>
+                              <input name="eventId" type="hidden" value={event.id} />
+                              <button
+                                className="h-full rounded-full bg-[#fff4f1] px-3 py-2 text-xs font-semibold text-[#9d3f31]"
+                                type="submit"
+                              >
+                                Delete
+                              </button>
+                            </form>
+                          </div>
+                        ) : null}
                       </article>
                     ) : (
                       <p className="text-sm text-[#aaa195]">No event scheduled</p>
