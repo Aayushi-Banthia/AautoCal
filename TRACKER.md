@@ -85,7 +85,7 @@ https://<vercel-domain>/api/auth/callback/google
 
 - [x] Run `npm run lint`
 - [x] Run `npm run build`
-- [ ] Test Google OAuth sign-in locally
+- [x] Test Google OAuth sign-in locally
 - [ ] Test real Google Calendar event fetch
 - [ ] Test real Google Calendar event creation
 - [ ] Test real Google Calendar event edit/reschedule
