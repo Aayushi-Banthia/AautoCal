@@ -2,10 +2,11 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 const navItems = [
-  { label: "Dashboard", icon: "D", href: "/" },
+  { label: "Dashboard", icon: "D", href: "/dashboard" },
   { label: "Calendar", icon: "C", href: "/calendar" },
   { label: "Tasks", icon: "T", href: "/tasks" },
   { label: "Templates", icon: "P", href: "/templates" },
+  { label: "Focus", icon: "F", href: "/focus" },
   { label: "Settings", icon: "S", href: "/settings" },
 ];
 
@@ -31,7 +32,7 @@ export function AppFrame({
       <div className="mx-auto flex min-h-screen max-w-7xl gap-6 px-4 py-4 lg:px-6">
         <aside className="hidden w-64 shrink-0 flex-col justify-between rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm lg:flex">
           <div>
-            <Link className="flex items-center gap-3" href="/">
+            <Link className="flex items-center gap-3" href="/dashboard">
               <div className="grid size-11 place-items-center rounded-xl bg-[#20201d] text-lg font-semibold text-white">
                 AC
               </div>
@@ -70,7 +71,7 @@ export function AppFrame({
 
         <section className="flex flex-1 flex-col gap-5">
           <div className="flex items-center justify-between rounded-2xl border border-[#ded7c9] bg-white/85 p-3 shadow-sm lg:hidden">
-            <Link className="flex items-center gap-3" href="/">
+            <Link className="flex items-center gap-3" href="/dashboard">
               <div className="grid size-10 place-items-center rounded-xl bg-[#20201d] text-sm font-semibold text-white">
                 AC
               </div>
@@ -80,7 +81,7 @@ export function AppFrame({
               </div>
             </Link>
             <div className="flex gap-2 text-xs font-semibold">
-              <Link className="rounded-xl border border-[#ded7c9] px-3 py-2" href="/">
+              <Link className="rounded-xl border border-[#ded7c9] px-3 py-2" href="/dashboard">
                 Home
               </Link>
               <Link
