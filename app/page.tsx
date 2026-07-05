@@ -1,362 +1,179 @@
+import Image from "next/image";
 import Link from "next/link";
-import { AuthStatus } from "./components/AuthStatus";
-import { ReminderNotifications } from "./components/ReminderNotifications";
-import { VoiceAssistant } from "./components/VoiceAssistant";
+import {
+  CalendarIcon,
+  CheckSquareIcon,
+  GearIcon,
+  HeartIcon,
+  MenuIcon,
+  PawIcon,
+  SearchIcon,
+  TimetableIcon,
+} from "./components/Icons";
 
-const navItems = [
-  { label: "Dashboard", icon: "D", href: "/" },
-  { label: "Calendar", icon: "C", href: "/calendar" },
-  { label: "Tasks", icon: "T", href: "/tasks" },
-  { label: "Templates", icon: "P", href: "/templates" },
-  { label: "Settings", icon: "S", href: "/settings" },
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Features", href: "#features" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
 ];
 
-const stats = [
-  { label: "Events today", value: "7", detail: "2 AI suggested" },
-  { label: "Focus hours", value: "4.5h", detail: "Protected blocks" },
-  { label: "Free slots", value: "3", detail: "Best at 5:30 PM" },
-  { label: "Reminders", value: "9", detail: "4 voice alerts" },
+const checklistRows = [
+  { classes: "bg-[#f89cac]/80" },
+  { classes: "bg-[#47cfcb]/60" },
+  { classes: "bg-[#47cfcb]/80" },
+  { classes: "bg-[#f6b26b]/70" },
 ];
 
-const days = [
-  {
-    name: "Mon",
-    date: "26",
-    focus: "Design",
-    load: "3 events",
-    events: [
-      { time: "09:00", title: "Daily brief", color: "bg-[#356859]" },
-      { time: "14:00", title: "Template research", color: "bg-[#c75d4d]" },
-    ],
-  },
-  {
-    name: "Tue",
-    date: "27",
-    focus: "Study",
-    load: "5 events",
-    events: [
-      { time: "10:30", title: "AI parser notes", color: "bg-[#8a6451]" },
-      { time: "18:00", title: "Revision block", color: "bg-[#356859]" },
-    ],
-  },
-  {
-    name: "Wed",
-    date: "28",
-    focus: "Build",
-    load: "4 events",
-    events: [
-      { time: "11:00", title: "Dashboard UI", color: "bg-[#c75d4d]" },
-      { time: "16:30", title: "Voice states", color: "bg-[#356859]" },
-    ],
-  },
-  {
-    name: "Thu",
-    date: "29",
-    focus: "Review",
-    load: "2 events",
-    events: [
-      { time: "12:00", title: "Sync planning", color: "bg-[#8a6451]" },
-    ],
-  },
-  {
-    name: "Fri",
-    date: "30",
-    focus: "Demo",
-    load: "3 events",
-    events: [
-      { time: "15:00", title: "Project demo", color: "bg-[#c75d4d]" },
-      { time: "19:00", title: "Weekly summary", color: "bg-[#356859]" },
-    ],
-  },
-];
-
-const reminders = [
-  { time: "09:00", title: "Daily planning brief", type: "AI brief" },
-  { time: "13:30", title: "Project research block", type: "Focus" },
-  { time: "18:00", title: "Prepare tomorrow's schedule", type: "Reminder" },
-];
-
-const commands = [
-  "Schedule a study session tomorrow at 6 PM",
-  "Find me two free slots before Friday",
-  "Remind me 30 minutes before my meeting",
-];
-
-const themes = [
-  {
-    name: "Minimal productivity",
-    accent: "bg-[#356859]",
-    colors: ["bg-white", "bg-[#20201d]", "bg-[#d9e8df]"],
-  },
-  {
-    name: "Pastel planner",
-    accent: "bg-[#c75d4d]",
-    colors: ["bg-[#f8d8cf]", "bg-[#f7e7ad]", "bg-[#cfe5df]"],
-  },
-  {
-    name: "Dark focus mode",
-    accent: "bg-[#20201d]",
-    colors: ["bg-[#20201d]", "bg-[#356859]", "bg-[#dbc7a4]"],
-  },
-];
-
-export default function Home() {
+export default function Landing() {
   return (
-    <main className="min-h-screen bg-[#f8f5ef] text-[#20201d]">
-      <div className="mx-auto flex min-h-screen max-w-7xl gap-6 px-4 py-4 lg:px-6">
-        <aside className="hidden w-64 shrink-0 flex-col justify-between rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm lg:flex">
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="grid size-11 place-items-center rounded-xl bg-[#20201d] text-lg font-semibold text-white">
-                AC
-              </div>
-              <div>
-                <p className="text-lg font-semibold">Aautocal</p>
-                <p className="text-sm text-[#777064]">Voice calendar</p>
-              </div>
+    <main className="min-h-screen bg-[#fdf6f2] text-[#2e2e2e]">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
+        {/* Nav */}
+        <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-white bg-white/70 px-5 py-4 shadow-sm backdrop-blur">
+          <Link className="flex items-center gap-2.5" href="/">
+            <div className="grid size-9 place-items-center rounded-xl bg-[#f89cac] text-white">
+              <CalendarIcon className="size-4.5" />
             </div>
+            <p className="text-lg font-semibold">
+              Auto<span className="text-[#f89cac]">Cal</span>
+            </p>
+          </Link>
 
-            <nav className="mt-9 space-y-2 text-sm font-medium">
-              {navItems.map((item, index) => (
-                <Link
-                  href={item.href}
-                  className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                    index === 0
-                      ? "bg-[#20201d] text-white"
-                      : "text-[#625c52] hover:bg-[#f1ece3]"
-                  }`}
-                  key={item.label}
-                >
-                  <span className="grid size-7 place-items-center rounded-lg bg-white/20 text-xs">
-                    {item.icon}
-                  </span>
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <nav className="hidden items-center gap-7 text-sm font-medium text-[#4a4a4a] md:flex">
+            {navLinks.map((link) => (
+              <a className="transition hover:text-[#f89cac]" href={link.href} key={link.label}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-          <div className="rounded-2xl bg-[#f1ece3] p-4">
-            <p className="text-sm font-semibold">Today&apos;s focus</p>
-            <p className="mt-2 text-2xl font-semibold">4h 30m</p>
-            <p className="mt-1 text-sm text-[#777064]">Protected planning time</p>
-          </div>
-        </aside>
-
-        <section className="flex flex-1 flex-col gap-5">
-          <div className="flex items-center justify-between rounded-2xl border border-[#ded7c9] bg-white/85 p-3 shadow-sm lg:hidden">
-            <div className="flex items-center gap-3">
-              <div className="grid size-10 place-items-center rounded-xl bg-[#20201d] text-sm font-semibold text-white">
-                AC
-              </div>
-              <div>
-                <p className="font-semibold">Aautocal</p>
-                <p className="text-xs text-[#777064]">Dashboard</p>
-              </div>
-            </div>
-            <button className="rounded-xl border border-[#ded7c9] px-3 py-2 text-sm font-semibold">
-              Menu
+          <div className="flex items-center gap-3">
+            <Link
+              className="rounded-full bg-[#f89cac] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e8628a]"
+              href="/dashboard"
+            >
+              Get Started
+            </Link>
+            <button
+              aria-label="Open menu"
+              className="grid size-10 place-items-center rounded-full border border-[#f0e9e9] text-[#8a8a8a] md:hidden"
+              type="button"
+            >
+              <MenuIcon className="size-4.5" />
             </button>
           </div>
+        </header>
 
-          <header className="rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm">
-            <div className="flex flex-col justify-between gap-5 xl:flex-row xl:items-center">
-              <div>
-                <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#8a6451]">
-                  AI planning workspace
-                </p>
-                <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
-                  Good morning, Aayushi
-                </h1>
-                <p className="mt-2 max-w-2xl text-[#625c52]">
-                  Speak a messy plan, get a clear calendar. Aautocal turns voice
-                  commands into events, reminders, and smart schedules.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <button className="rounded-full border border-[#ded7c9] px-5 py-3 text-sm font-semibold text-[#356859] transition hover:bg-[#edf7f2]">
-                  Today
-                </button>
-                <AuthStatus />
-              </div>
+        {/* Hero */}
+        <section className="mt-6 grid gap-10 rounded-3xl border border-white bg-white/60 p-6 sm:p-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+              Plan Smart.
+              <br />
+              <span className="text-[#f89cac]">Stay Ahead.</span>
+            </h1>
+            <p className="mt-5 max-w-md text-[#5a5a5a]">
+              AutoCal is your intelligent calendar and task companion built for
+              students who want structure, clarity and calm.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                className="rounded-full bg-[#f89cac] px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#e8628a]"
+                href="/dashboard"
+              >
+                Get Started
+              </Link>
+              <a
+                className="rounded-full border border-[#f3b6c4] px-7 py-3.5 text-sm font-semibold text-[#e8628a] transition hover:bg-white"
+                href="#features"
+              >
+                Explore Features
+              </a>
             </div>
-
-            <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-              {stats.map((stat) => (
-                <article
-                  className="rounded-2xl border border-[#e7dfd1] bg-[#fbfaf7] p-4"
-                  key={stat.label}
-                >
-                  <p className="text-sm text-[#777064]">{stat.label}</p>
-                  <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
-                  <p className="mt-1 text-xs font-medium text-[#8a6451]">
-                    {stat.detail}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </header>
-
-          <section className="rounded-2xl border border-[#ded7c9] bg-white/85 p-4 shadow-sm">
-            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-              <div className="flex flex-1 items-center rounded-2xl border border-[#ded7c9] bg-[#fbfaf7] px-4 py-3">
-                <span className="mr-3 text-sm font-semibold text-[#8a6451]">
-                  Ask
-                </span>
-                <p className="text-sm text-[#777064]">
-                  Try: plan my week around my project deadline
-                </p>
-              </div>
-              <button className="rounded-2xl bg-[#20201d] px-5 py-3 text-sm font-semibold text-white">
-                Run AI plan
-              </button>
-            </div>
-          </section>
-
-          <div className="grid gap-5 xl:grid-cols-[1.45fr_0.85fr]">
-            <section className="rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm">
-              <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
-                <div>
-                  <h2 className="text-xl font-semibold">Weekly command view</h2>
-                  <p className="text-sm text-[#777064]">
-                    Flexible calendar blocks with AI-suggested workload.
-                  </p>
-                </div>
-                <div className="flex rounded-full bg-[#f1ece3] p-1 text-sm font-medium">
-                  {["Day", "Week", "Month"].map((view, index) => (
-                    <button
-                      className={`rounded-full px-4 py-2 ${
-                        index === 1 ? "bg-white shadow-sm" : "text-[#777064]"
-                      }`}
-                      key={view}
-                    >
-                      {view}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-5 grid gap-3 md:grid-cols-5">
-                {days.map((day, index) => (
-                  <article
-                    className={`min-h-64 rounded-2xl border p-4 transition hover:-translate-y-1 hover:shadow-md ${
-                      index === 2
-                        ? "border-[#356859] bg-[#edf7f2]"
-                        : "border-[#e7dfd1] bg-[#fbfaf7]"
-                    }`}
-                    key={day.name}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold">{day.name}</p>
-                        <p className="text-xs text-[#777064]">{day.focus}</p>
-                      </div>
-                      <p className="rounded-full bg-white px-3 py-1 text-sm">
-                        {day.date}
-                      </p>
-                    </div>
-                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#8a6451]">
-                      {day.load}
-                    </p>
-                    <div className="mt-3 space-y-3">
-                      {day.events.map((event) => (
-                        <div
-                          className="rounded-xl border border-[#e7dfd1] bg-white p-3 shadow-sm"
-                          key={event.title}
-                        >
-                          <div
-                            className={`mb-2 h-1.5 w-12 rounded-full ${event.color}`}
-                          />
-                          <p className="font-mono text-xs text-[#8a6451]">
-                            {event.time}
-                          </p>
-                          <p className="mt-1 text-sm font-semibold">
-                            {event.title}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <VoiceAssistant />
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-            <section className="rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm">
-              <h2 className="text-xl font-semibold">Upcoming reminders</h2>
-              <div className="mt-4 space-y-3">
-                {reminders.map((item) => (
-                  <article
-                    className="flex items-center justify-between rounded-2xl bg-[#fbfaf7] p-4"
-                    key={item.title}
-                  >
-                    <div>
-                      <p className="font-semibold">{item.title}</p>
-                      <p className="text-sm text-[#777064]">{item.type}</p>
-                    </div>
-                    <p className="font-mono text-sm text-[#8a6451]">
-                      {item.time}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </section>
+          {/* Illustration */}
+          <div className="relative flex min-h-[380px] items-center justify-center">
+            <div className="absolute inset-0 m-auto size-[320px] rounded-full bg-[#f89cac]/15 sm:size-[380px]" />
 
-            <section className="rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm">
-              <h2 className="text-xl font-semibold">LLM skill showcase</h2>
-              <div className="mt-4 grid gap-3 md:grid-cols-3">
-                {commands.map((command) => (
-                  <article
-                    className="rounded-2xl border border-[#e7dfd1] bg-[#fbfaf7] p-4 text-sm text-[#625c52] transition hover:border-[#c75d4d]"
-                    key={command}
-                  >
-                    {command}
-                  </article>
+            {/* App card mockup */}
+            <div className="absolute right-0 top-2 w-56 rounded-2xl border border-[#f0e9e9] bg-white p-3 shadow-lg sm:w-64">
+              <div className="flex items-center gap-2 rounded-lg bg-[#f7f7f7] px-2 py-1.5 text-[#8a8a8a]">
+                <MenuIcon className="size-3.5" />
+                <SearchIcon className="size-3.5" />
+                <TimetableIcon className="size-3.5" />
+                <CheckSquareIcon className="size-3.5" />
+                <GearIcon className="ml-auto size-3.5" />
+              </div>
+              <div className="mt-3 space-y-2">
+                {checklistRows.map((row, i) => (
+                  <div className="flex items-center gap-2" key={i}>
+                    <span className="grid size-4 shrink-0 place-items-center rounded-full bg-[#47cfcb] text-white">
+                      <svg className="size-2.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                        <path d="M5 12.5 10 17 19 7" />
+                      </svg>
+                    </span>
+                    <span className={`h-4 flex-1 rounded-md ${row.classes}`} />
+                  </div>
                 ))}
               </div>
-            </section>
+            </div>
+
+            {/* Sticky note */}
+            <div className="absolute right-2 top-40 w-28 rotate-6 rounded-lg bg-[#fdf3d6] p-3 text-xs font-semibold leading-relaxed text-[#8a7a3e] shadow-md sm:right-4">
+              Focus
+              <br />
+              Plan
+              <br />
+              Achieve
+            </div>
+
+            {/* Speech bubble */}
+            <div className="absolute left-2 top-4 rounded-2xl rounded-bl-sm border border-[#f0e9e9] bg-white px-4 py-2.5 shadow-sm sm:left-8">
+              <HeartIcon className="size-5 text-[#f89cac]" />
+            </div>
+
+            {/* Reggie */}
+            <div className="relative mt-10 flex flex-col items-center">
+              <Image
+                alt="Reggie the AutoCal mascot, a dog working on a laptop"
+                className="drop-shadow-sm"
+                height={222}
+                src="/reggie/reggie-laptop.png"
+                width={237}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Quote bar */}
+        <section className="mt-6 grid gap-6 rounded-3xl border border-white bg-white/60 p-6 sm:grid-cols-3 sm:p-8">
+          <div className="sm:col-span-1">
+            <p className="text-[#4a4a4a]">
+              &quot;Discipline is the bridge between goals and accomplishment.&quot;
+            </p>
+            <p className="mt-1 text-sm text-[#8a8a8a]">
+              &ndash; Reggie <PawIcon className="inline size-3 text-[#f89cac]" />
+            </p>
           </div>
 
-          <section className="rounded-2xl border border-[#ded7c9] bg-white/85 p-5 shadow-sm">
-            <div className="flex flex-col justify-between gap-2 md:flex-row md:items-center">
-              <div>
-                <h2 className="text-xl font-semibold">Aesthetic templates</h2>
-                <p className="text-sm text-[#777064]">
-                  Visual planning modes inspired by productivity dashboards.
-                </p>
-              </div>
-              <span className="rounded-full bg-[#edf7f2] px-3 py-1 text-xs font-semibold text-[#356859]">
-                Theme switching soon
-              </span>
+          <div className="flex items-center gap-3">
+            <span className="text-2xl font-extrabold text-[#e2352f]">ti</span>
+            <div>
+              <p className="text-sm font-semibold">Made for</p>
+              <p className="text-sm font-semibold">Thaparians</p>
             </div>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
-              {themes.map((theme) => (
-                <article
-                  className="rounded-2xl border border-[#e7dfd1] bg-[#fbfaf7] p-4"
-                  key={theme.name}
-                >
-                  <div className="flex gap-2">
-                    {theme.colors.map((color) => (
-                      <span
-                        className={`h-10 flex-1 rounded-xl border border-[#ded7c9] ${color}`}
-                        key={color}
-                      />
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center justify-between">
-                    <p className="font-semibold">{theme.name}</p>
-                    <span className={`size-3 rounded-full ${theme.accent}`} />
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+          </div>
 
-          <ReminderNotifications />
+          <div className="flex items-center gap-3">
+            <HeartIcon className="size-6 shrink-0 text-[#f89cac]" />
+            <div>
+              <p className="text-sm font-semibold">Designed with</p>
+              <p className="text-sm font-semibold">and Reggie</p>
+            </div>
+          </div>
         </section>
       </div>
     </main>
