@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { AuthStatus } from "../components/AuthStatus";
@@ -136,8 +137,13 @@ export default async function Home() {
           </div>
 
           <div className="rounded-2xl bg-[#fdeef1] p-4">
-            <div className="flex items-center gap-3">
-              <ReggiePlaceholder size="sm" />
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Image
+                alt="Reggie the AutoCal mascot"
+                height={64}
+                src="/reggie/reggie-sidebar-icon.png"
+                width={64}
+              />
               <div>
                 <p className="text-sm font-semibold">Hey, I&apos;m Reggie! 🐾</p>
                 <p className="text-xs text-[#8a6d75]">Let&apos;s make today productive!</p>
