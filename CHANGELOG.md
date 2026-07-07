@@ -2,6 +2,19 @@
 
 Tracks each delivered version of the UI/UX redesign. Newest at top.
 
+## v4 — Real Reggie image in dashboard sidebar
+
+- Background-removed your dog-with-laptop illustration (flood-fill from the
+  edges so the white fur stayed intact, only the actual backdrop was
+  stripped) — saved as `public/reggie/reggie-sidebar-icon.png`
+- Replaced the dashed-circle placeholder in the dashboard sidebar's "Hey,
+  I'm Reggie!" card with this real image
+- Changed that card's layout from side-by-side to stacked — image now sits
+  directly above the text, as requested
+- The other Reggie placeholder spots (voice assistant transcript corner,
+  "Reggie's tip" card, landing page, reminders empty state) are untouched —
+  only the sidebar spot was in scope for this change
+
 ## v3 — Focus page background swap
 
 - Replaced `public/focus/focus-bg.png` with your new forest/waterfall
