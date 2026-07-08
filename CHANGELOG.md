@@ -2,6 +2,25 @@
 
 Tracks each delivered version of the UI/UX redesign. Newest at top.
 
+## v5 — Tasks page redesign + sidebar spacing fix
+
+- **Tasks page is now fully on the new theme.** `TaskBoard.tsx` (stat cards,
+  add-task form, To Do/In Progress/Done columns) and the shared `AppFrame.tsx`
+  shell (sidebar, header) both now use the coral/pink/teal palette and the
+  new icon set — verified zero old-theme colors remain on `/tasks`
+- **Correction/catch-up:** `AppFrame.tsx` had actually already been recolored
+  in an earlier pass, but I never walked it through as a GitHub change before
+  now — that's why your live Tasks page still looked old. It's properly
+  called out below this time.
+- Dashboard sidebar: increased the gap between the Reggie image and the pink
+  card so it reads clearly as sitting in the white sidebar area, not
+  overlapping the pink block
+
+**Heads up:** Calendar, Templates, and Settings pages share this same
+`AppFrame` shell. Since it's now updated, their *sidebar/header* will look
+new, but their *page content* is still old-theme — so those three pages will
+look visually mismatched (new shell, old content) until we redesign them too.
+
 ## v4 — Real Reggie image in dashboard sidebar
 
 - Background-removed your dog-with-laptop illustration (flood-fill from the
