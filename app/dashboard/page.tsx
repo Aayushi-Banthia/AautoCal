@@ -136,18 +136,18 @@ export default async function Home() {
             </nav>
           </div>
 
-          <div className="rounded-2xl bg-[#fdeef1] p-4">
-            <div className="flex flex-col items-center gap-2 text-center">
+          <div>
+            <div className="flex justify-center pb-4">
               <Image
                 alt="Reggie the AutoCal mascot"
-                height={64}
+                height={72}
                 src="/reggie/reggie-sidebar-icon.png"
-                width={64}
+                width={72}
               />
-              <div>
-                <p className="text-sm font-semibold">Hey, I&apos;m Reggie! 🐾</p>
-                <p className="text-xs text-[#8a6d75]">Let&apos;s make today productive!</p>
-              </div>
+            </div>
+            <div className="rounded-2xl bg-[#fdeef1] p-4 text-center">
+              <p className="text-sm font-semibold">Hey, I&apos;m Reggie! 🐾</p>
+              <p className="text-xs text-[#8a6d75]">Let&apos;s make today productive!</p>
             </div>
           </div>
         </aside>
